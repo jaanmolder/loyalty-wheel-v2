@@ -1,11 +1,19 @@
 body {
-    background: linear-gradient(to left,rgb(138, 52, 52),rgb(97, 97, 199));
+    /*background: linear-gradient(to left,rgb(138, 52, 52),rgb(97, 97, 199));*/
 }
 
-.App {
+.app {
     font-family: sans-serif;
     text-align: center;
 }
+
+.wheel {
+    border: 10px solid black;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+}
+
 
 button {
     background: none;
@@ -50,12 +58,13 @@ button {
 }
 
 
-#selector {
+.selector {
     position: absolute;
-    top: 21vh;
+    top: 10vh;
     right: 47.5vw;
     font-size: 40px;
     z-index: 3;
+    color: #fb0505;
 }
 
 #result{
