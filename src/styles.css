@@ -8,7 +8,7 @@ body {
 }
 
 .wheel {
-    border: 10px solid black;
+    border: 10px solid #2f2a27;
     border-radius: 50%;
     padding: 0;
     margin: 0;
