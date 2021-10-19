@@ -1,191 +1,140 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { spinnerMapping } from "./spinner-param";
-import { getSecCol } from "./func/gen-func";
+import { bigSpinMapping, smallSpinMapping } from "./spinner-param";
+import { initLoyaltyWheel, spin } from "./func/wheel-func";
+import { bigWheelSecId, smallWheelSecId } from "./setup/settings";
+import style from "./spinner.module.css";
 
 const MainSpinner: FunctionComponent = () => {
-  const list = spinnerMapping;
-  const [radius, setRadius] = useState(75); // PIXELS
-  const [rotate, setRotate] = useState(0); // DEGREES
-  const [easeOut, setEaseOut] = useState(0); // SECONDS
-  const [angle, setAngle] = useState(0); // RADIANS
-  const [top, setTop] = useState(0); // INDEX
-  const [offset, setOffset] = useState(0); // RADIANS
-  const [net, setNet] = useState(0); // RADIANS
-  const [result, setResult] = useState(0); // INDEX
-  const [spinning, setSpinning] = useState(false);
+  // SMALL SPIN
+  // const wheelArray = smallSpinMapping;
+  // const wheelRadPx = 50;
+  // const baseSize = wheelRadPx * 2.33;
+  // const textRadius = baseSize - wheelRadPx;
+  // const canvasHW = "233";
+
+  // BIG SPIN
+  // const wheelArray = bigSpinMapping;
+  // const wheelRadPx = 75;
+  // const baseSize = wheelRadPx * 3.33;
+  // const textRadius = baseSize - wheelRadPx * 2;
+  // const canvasHW = "500";
+
+  //CHANGE
+  const [spinLevel, setSpinLevel] = useState(0);
+  const [wheelArray, setWheelArray] = useState(bigSpinMapping);
+  const [wheelRadPx, setWheelRadPx] = useState(75);
+  const [baseSize, setBaseSize] = useState(wheelRadPx * 3.33);
+  const [textRadius, setTextRadius] = useState(baseSize - wheelRadPx * 2);
+  const [canvasHW, setCanvasHW] = useState("500");
+  // BACK
+  // const wheelRadPx = 75;
+  // const baseSize = wheelRadPx * 3.33;
+  // const textRadius = baseSize - 150;
+  const [rotDeg, setRotDeg] = useState(0);
+  const [easeOutSec, setEaseOutSec] = useState(0);
+  const [angleRadians, setAngleRadians] = useState(0);
+  const [topIndex, setTopIndex] = useState(0);
+  const [offsetRadians, setOffsetRadians] = useState(0);
+  const [resIndex, setResIndex] = useState(0); // INDEX
+  const [started, setStarted] = useState(false);
+  // const [radius, setRadius] = useState(75); // PIXELS
+  // const [net, setNet] = useState(0); // RADIANS
 
   useEffect(() => {
-    initWheel();
+    initLoyaltyWheel(
+      wheelArray,
+      setAngleRadians,
+      setTopIndex,
+      setOffsetRadians,
+      wheelRadPx,
+      baseSize,
+      textRadius,
+      bigWheelSecId
+    );
   });
 
-  const topPosition = (num: number, angle: number) => {
-    // set starting index and angle offset based on list length
-    // works upto 9 options
-    let topSpot = 0;
-    let degreesOff = 0;
-    if (num === 10) {
-      topSpot = 8;
-      degreesOff = Math.PI / 2 - angle * 2;
-    } else if (num === 9) {
-      topSpot = 7;
-      degreesOff = Math.PI / 2 - angle * 2;
-    } else if (num === 8) {
-      topSpot = 6;
-      degreesOff = 0;
-    } else if (num <= 7 && num > 4) {
-      topSpot = num - 1;
-      degreesOff = Math.PI / 2 - angle;
-    } else if (num === 4) {
-      topSpot = num - 1;
-      degreesOff = 0;
-    } else if (num <= 3) {
-      topSpot = num;
-      degreesOff = Math.PI / 2;
-    }
-
-    setTop(topSpot - 1);
-    setOffset(degreesOff);
+  const resetWheel = () => {
+    setRotDeg(0);
+    setEaseOutSec(0);
+    setResIndex(0);
+    setStarted(false);
   };
 
-  const renderSector = (
-    index: number,
-    text: string,
-    start: number,
-    arc: number,
-    color: string
-  ) => {
-    // create canvas arc for each list element
-    let canvas = document.getElementById("wheel");
-    // @ts-ignore
-    let ctx = canvas.getContext("2d");
-    // @ts-ignore
-    let x = canvas.width / 2;
-    // @ts-ignore
-    let y = canvas.height / 2;
-    let getRadius = radius;
-    let startAngle = start;
-    let endAngle = start + arc;
-    let angle = index * arc;
-    let baseSize = getRadius * 3.33;
-    let textRadius = baseSize - 150;
-
-    ctx.beginPath();
-    ctx.arc(x, y, getRadius, startAngle, endAngle, false);
-    ctx.lineWidth = getRadius * 2;
-    ctx.strokeStyle = color;
-
-    ctx.font = "17px Arial";
-    ctx.fillStyle = "black";
-    ctx.stroke();
-
-    ctx.save();
-    ctx.translate(
-      baseSize + Math.cos(angle - arc / 2) * textRadius,
-      baseSize + Math.sin(angle - arc / 2) * textRadius
-    );
-    ctx.rotate(angle - arc / 2 + Math.PI / 2);
-    ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-    ctx.restore();
-  };
-
-  const spin = () => {
-    // set random spin degree and ease out time
-    // set state variables to initiate animation
-    let randomSpin = Math.floor(Math.random() * 900) + 500;
-    setRotate(randomSpin);
-    setEaseOut(2);
-    setSpinning(true);
-
-    // calcalute result after wheel stops spinning
-    setTimeout(() => {
-      getResult(randomSpin);
-    }, 2000);
-  };
-
-  const getResult = (spin: number) => {
-    // find net rotation and add to offset angle
-    // repeat substraction of inner angle amount from total distance traversed
-    // use count as an index to find value of result from state list
-    // const { angle, top, offset, list } = this.state;
-    let netRotation = ((spin % 360) * Math.PI) / 180; // RADIANS
-    // @ts-ignore
-    let travel = netRotation + offset;
-    let count = top + 1;
-    while (travel > 0) {
-      travel = travel - angle;
-      count--;
-    }
-    let result;
-    if (count >= 0) {
-      result = count;
+  const spinWheelHandler = () => {
+    if (started) {
+      resetWheel();
     } else {
-      result = list.length + count;
+      spin(
+        setRotDeg,
+        setEaseOutSec,
+        setStarted,
+        topIndex,
+        angleRadians,
+        wheelArray,
+        setResIndex,
+        offsetRadians
+      );
     }
-
-    // set state variable to display result
-    setNet(netRotation);
-    setResult(result);
   };
 
-  const reset = () => {
-    // reset wheel and result
-    setRotate(0);
-    setEaseOut(0);
-    setResult(0);
-    setSpinning(false);
-  };
-
-  const initWheel = () => {
-    // determine number/size of sectors that need to created
-    let numOptions = list.length;
-    let arcSize = (2 * Math.PI) / numOptions;
-    setAngle(arcSize);
-
-    // get index of starting position of selector
-    topPosition(numOptions, arcSize);
-
-    // dynamically generate sectors from state list
-    let angle = 0;
-    for (let i = 0; i < numOptions; i++) {
-      let text = list[i];
-      renderSector(i + 1, text, angle, arcSize, getSecCol(i));
-      angle += arcSize;
+  const changeWheelHandler = () => {
+    if (spinLevel === 0) {
+      setSpinLevel(1);
+      setWheelArray(smallSpinMapping);
+      // setWheelRadPx(75);
+      // setBaseSize(wheelRadPx * 3.33);
+      // setTextRadius(baseSize - wheelRadPx* 2);
+      // setCanvasHW("500");
     }
   };
 
   return (
-    <>
-      {" "}
-      <div className="app">
-        <span className="selector">&#9660;</span>
-        <canvas
-          className="wheel"
-          id="wheel"
-          width="500"
-          height="500"
-          style={{
-            WebkitTransform: `rotate(${rotate}deg)`,
-            WebkitTransition: `-webkit-transform ${easeOut}s ease-out`,
-          }}
-        />
+    <div className={style.mainSpin}>
+      <span className={style.selector}>&#9660;</span>
 
-        {spinning ? (
-          <button type="button" id="reset" onClick={reset}>
-            reset
-          </button>
-        ) : (
-          <button type="button" id="spin" onClick={spin}>
-            spin
-          </button>
-        )}
-        <div className="display">
-          <span id="readout">
-            YOU WON:{"  "}
-            <span id="result">{list[result]}</span>
-          </span>
-        </div>
+      <canvas
+        id={bigWheelSecId}
+        width={canvasHW}
+        height={canvasHW}
+        style={{
+          WebkitTransform: `rotate(${rotDeg}deg)`,
+          WebkitTransition: `-webkit-transform ${easeOutSec}s ease-out`,
+        }}
+      />
+
+      <button
+        type="button"
+        className={style.spinButton}
+        onClick={spinWheelHandler}
+      >
+        ICON
+      </button>
+
+      <div />
+      <button
+        type="button"
+        className={style.changeButton}
+        onClick={changeWheelHandler}
+      >
+        CHANGE
+      </button>
+
+      {/*{spinning ? (*/}
+      {/*  <button type="button" id="reset" onClick={resetWheel}>*/}
+      {/*    reset*/}
+      {/*  </button>*/}
+      {/*) : (*/}
+      {/*  <button type="button" id="spin" onClick={spin}>*/}
+      {/*    spin*/}
+      {/*  </button>*/}
+      {/*)}*/}
+      <div>
+        <span className={style.readout}>
+          YOU WON:{"  "}
+          <span>{wheelArray[resIndex]}</span>
+        </span>
       </div>
-    </>
+    </div>
   );
 };
 

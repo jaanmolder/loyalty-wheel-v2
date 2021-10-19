@@ -1,12 +1,12 @@
 import React  from "react";
-import "./styles.css";
+import "./App.css";
 import MainSpinner from "./components/main-spinner";
 
 function App() {
 
 
   return (
-      <div className="app">
+      <div className="mainSpin">
         <MainSpinner />
       </div>
   );
