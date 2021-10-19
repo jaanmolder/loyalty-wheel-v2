@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from "react";
 import {
-  bigWheelSecId, centerWheelSecId,
-  levelOne,
+  bigWheelSecId,
+  centerWheelSecId,
   levelZero,
   smallWheelSecId,
 } from "./setup/settings";
 import styles from "./wheel-canvas.module.css";
-import { maxWin } from "./spinner-param";
 
 type WheelCanvasTypes = {
   canvasHW: string;
@@ -23,14 +22,6 @@ const WheelCanvas: FunctionComponent<WheelCanvasTypes> = ({
   easeOutSec,
   spinLevel,
 }) => {
-  let centerTextStyle = styles.centerTextZero;
-  let centerWheelStyle = styles.centerWheelZero;
-
-  if (spinLevel === levelOne) {
-    centerTextStyle = styles.centerTextOne;
-    centerWheelStyle = styles.centerWheelZero;
-  }
-
   return (
     <div className={styles.canvasDiv}>
       <canvas
@@ -51,19 +42,12 @@ const WheelCanvas: FunctionComponent<WheelCanvasTypes> = ({
           height={smallCanvasHW}
         />
       ) : null}
-
       <canvas
-          id={centerWheelSecId}
-          className={styles.centerWheel}
-          width={canvasHW}
-          height={canvasHW}
+        id={centerWheelSecId}
+        className={styles.centerWheel}
+        width={canvasHW}
+        height={canvasHW}
       />
-
-      {/*<div className={styles.centerWheelDiv}>*/}
-      {/*  <div className={centerWheelStyle}>*/}
-      {/*    <span className={centerTextStyle}>{maxWin}</span>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
     </div>
   );
 };

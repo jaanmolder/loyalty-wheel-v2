@@ -5,7 +5,6 @@ import {
   smallSecTextFont,
   levelZero,
   centerWheelSecId,
-  canvasHW,
 } from "../setup/settings";
 import { maxWin } from "../spinner-param";
 
@@ -202,20 +201,11 @@ export const renCenterWheel = (wheelSecId: string, wheelRadPx: number) => {
 
   ctx.beginPath();
   ctx.arc(x, y, outRad, 0, 2 * Math.PI);
-
   ctx.stroke();
   ctx.fill();
   ctx.fillStyle = secTextColor;
   ctx.font = bigSecTextFont;
-  console.log(y);
-  console.log(ctx.measureText(text));
-  ctx.fillText(text, x - ctx.measureText(text).width / 2, y+21/2);
-  // ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-
-  // ctx.font = bigSecTextFont;
-  // ctx.fillStyle = 'black';
-  // ctx.fillText('text', -ctx.measureText('text').width / 2, 0);
-  // ctx.restore();
+  ctx.fillText(text, x - ctx.measureText(text).width / 2, y + 21 / 2);
 };
 
 export const initLoyaltyWheel = (

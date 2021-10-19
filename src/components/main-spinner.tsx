@@ -34,7 +34,7 @@ const MainSpinner: FunctionComponent = () => {
   // const wheelRadPx = 75;
   // const baseSize = wheelRadPx * 3.33;
   // const textRadius = baseSize - 150;
-  const [rotDeg, setRotDeg] = useState(0);
+  const [rotDeg, setRotDeg] = useState(18);
   const [easeOutSec, setEaseOutSec] = useState(0);
   const [angleRadians, setAngleRadians] = useState(0);
   const [topIndex, setTopIndex] = useState(0);
