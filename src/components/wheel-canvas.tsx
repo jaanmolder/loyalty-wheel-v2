@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import {
-  bigWheelSecId,
+  bigWheelSecId, centerWheelSecId,
   levelOne,
   levelZero,
   smallWheelSecId,
@@ -52,11 +52,18 @@ const WheelCanvas: FunctionComponent<WheelCanvasTypes> = ({
         />
       ) : null}
 
-      <div className={styles.centerWheelDiv}>
-        <div className={centerWheelStyle}>
-          <span className={centerTextStyle}>{maxWin}</span>
-        </div>
-      </div>
+      <canvas
+          id={centerWheelSecId}
+          className={styles.centerWheel}
+          width={canvasHW}
+          height={canvasHW}
+      />
+
+      {/*<div className={styles.centerWheelDiv}>*/}
+      {/*  <div className={centerWheelStyle}>*/}
+      {/*    <span className={centerTextStyle}>{maxWin}</span>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
     </div>
   );
 };

@@ -16,7 +16,17 @@
   left: 233px;
   top: 233px;
   z-index: 1;
+  transform: rotate(234deg);
 }
+
+.centerWheel {
+  /*border: 1px solid blue;*/
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+
 
 .centerWheelDiv {
   /*border: 1px solid darkred;*/

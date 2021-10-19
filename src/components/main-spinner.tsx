@@ -2,17 +2,16 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { bigSpinMapping, smallSpinMapping, spinButton } from "./spinner-param";
 import { initLoyaltyWheel, spin } from "./func/wheel-func";
 import {
-  bigWheelSecId,
+  bigWheelSecId, canvasHW,
   levelOne,
-  levelZero,
+  levelZero, smallCanvasHW,
   smallWheelSecId,
 } from "./setup/settings";
 import style from "./spinner.module.css";
 import WheelCanvas from "./wheel-canvas";
 
 const MainSpinner: FunctionComponent = () => {
-  const canvasHW = "700";
-  const smallCanvasHW = "234";
+
   // SMALL SPIN
   const smallWheelRadPx = 50;
   const smallBaseSize = smallWheelRadPx * 2.33;

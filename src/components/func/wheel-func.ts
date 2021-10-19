@@ -4,7 +4,10 @@ import {
   bigWheelSecId,
   smallSecTextFont,
   levelZero,
+  centerWheelSecId,
+  canvasHW,
 } from "../setup/settings";
+import { maxWin } from "../spinner-param";
 
 export const isOdd = (num: number) => num % 2 === 1;
 
@@ -147,11 +150,7 @@ export const renWheelSec = (
     baseSize + Math.sin(angle - arc / 2) * textRadius
   );
   ctx.rotate(angle - arc / 2 + Math.PI / 2);
-  if (wheelSecId === bigWheelSecId) {
-    ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-  } else {
-    ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-  }
+  ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
   ctx.restore();
 };
 
@@ -178,6 +177,47 @@ export const renWheelBorder = (wheelSecId: string, wheelRadPx: number) => {
   ctx.stroke();
 };
 
+export const renCenterWheel = (wheelSecId: string, wheelRadPx: number) => {
+  console.log(wheelSecId);
+  const canvas = document.getElementById(wheelSecId);
+  // @ts-ignore
+  const ctx = canvas.getContext("2d");
+  // @ts-ignore
+  const x = canvas.width / 2;
+  // @ts-ignore
+  const y = canvas.height / 2;
+  const text = maxWin;
+  ctx.strokeStyle = "#2b1912";
+  ctx.lineWidth = 5;
+  ctx.fillStyle = "#333333";
+
+  // ctx.fillStyle = 'red';
+  let outRad = 40;
+
+  // if (wheelSecId === bigWheelSecId) {
+  //   outRad = outRad + 10;
+  // } else {
+  //   outRad = outRad - 5;
+  // }
+
+  ctx.beginPath();
+  ctx.arc(x, y, outRad, 0, 2 * Math.PI);
+
+  ctx.stroke();
+  ctx.fill();
+  ctx.fillStyle = secTextColor;
+  ctx.font = bigSecTextFont;
+  console.log(y);
+  console.log(ctx.measureText(text));
+  ctx.fillText(text, x - ctx.measureText(text).width / 2, y+21/2);
+  // ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+
+  // ctx.font = bigSecTextFont;
+  // ctx.fillStyle = 'black';
+  // ctx.fillText('text', -ctx.measureText('text').width / 2, 0);
+  // ctx.restore();
+};
+
 export const initLoyaltyWheel = (
   wheelArray: string | any[],
   setAngleRadians: (arg0: number) => void,
@@ -196,6 +236,10 @@ export const initLoyaltyWheel = (
 
   wheelTopPos(numOptions, arcSize, setTopIndex, setOffsetRadians);
   renWheelBorder(wheelSecId, wheelRadPx);
+
+  if (wheelSecId === bigWheelSecId) {
+    renCenterWheel(centerWheelSecId, wheelRadPx);
+  }
 
   // dynamically generate sectors from state list
   let angleDeg = 0;
