@@ -3,6 +3,7 @@ import {
   bigSecTextFont,
   bigWheelSecId,
   smallSecTextFont,
+  levelZero,
 } from "../setup/settings";
 
 export const isOdd = (num: number) => num % 2 === 1;
@@ -110,7 +111,8 @@ export const renWheelSec = (
   wheelRadPx: number,
   baseSize: number,
   textRadius: number,
-  wheelSecId: string
+  wheelSecId: string,
+  spinLevel: number
 ) => {
   // create canvas arc for each list element
   const canvas = document.getElementById(wheelSecId);
@@ -130,7 +132,7 @@ export const renWheelSec = (
   ctx.lineWidth = wheelRadPx * 2;
   ctx.strokeStyle = colorCode;
 
-  if (wheelSecId === bigWheelSecId) {
+  if (spinLevel === levelZero) {
     ctx.font = bigSecTextFont;
     ctx.fillStyle = secTextColor;
   } else {
@@ -145,8 +147,35 @@ export const renWheelSec = (
     baseSize + Math.sin(angle - arc / 2) * textRadius
   );
   ctx.rotate(angle - arc / 2 + Math.PI / 2);
-  ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+  if (wheelSecId === bigWheelSecId) {
+    ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+  } else {
+    ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+  }
   ctx.restore();
+};
+
+export const renWheelBorder = (wheelSecId: string, wheelRadPx: number) => {
+  const canvas = document.getElementById(wheelSecId);
+  // @ts-ignore
+  const ctx = canvas.getContext("2d");
+  // @ts-ignore
+  const x = canvas.width / 2;
+  // @ts-ignore
+  const y = canvas.height / 2;
+  ctx.strokeStyle = "#2b1912";
+  ctx.lineWidth = 20;
+  let outRad = wheelRadPx * 2;
+
+  if (wheelSecId === bigWheelSecId) {
+    outRad = outRad + 10;
+  } else {
+    outRad = outRad - 5;
+  }
+
+  ctx.beginPath();
+  ctx.arc(x, y, outRad, 0, 2 * Math.PI);
+  ctx.stroke();
 };
 
 export const initLoyaltyWheel = (
@@ -157,7 +186,8 @@ export const initLoyaltyWheel = (
   wheelRadPx: number,
   baseSize: number,
   textRadius: number,
-  wheelSecId: string
+  wheelSecId: string,
+  spinLevel: number
 ) => {
   // determine number/size of sectors that need to created
   const numOptions = wheelArray.length;
@@ -165,6 +195,7 @@ export const initLoyaltyWheel = (
   setAngleRadians(arcSize);
 
   wheelTopPos(numOptions, arcSize, setTopIndex, setOffsetRadians);
+  renWheelBorder(wheelSecId, wheelRadPx);
 
   // dynamically generate sectors from state list
   let angleDeg = 0;
@@ -179,7 +210,8 @@ export const initLoyaltyWheel = (
       wheelRadPx,
       baseSize,
       textRadius,
-      wheelSecId
+      wheelSecId,
+      spinLevel
     );
     angleDeg += arcSize;
   }

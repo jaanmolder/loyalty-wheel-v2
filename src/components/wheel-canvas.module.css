@@ -1,0 +1,60 @@
+.canvasDiv {
+  position: relative;
+}
+
+.bigWheel {
+  /*border: 1px solid green;*/
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.smallWheel {
+  /*border: 1px solid purple;*/
+  position: absolute;
+  left: 233px;
+  top: 233px;
+  z-index: 1;
+}
+
+.centerWheelDiv {
+  /*border: 1px solid darkred;*/
+  /*height: 700px;*/
+  /*width: 700px;*/
+
+  position: absolute;
+  z-index: 2;
+  /*left: 300px;*/
+  /*top: 300px;*/
+  padding-left: 295px;
+  padding-top: 295px;
+}
+
+.centerWheelZero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*position: absolute;*/
+  /*top: 27vh;*/
+  /*right: 44.5vw;*/
+  height: 100px;
+  width: 100px;
+  border: 10px solid #2b1912;
+  border-radius: 50%;
+  background-color: #333333;
+  /*margin: auto;*/
+}
+
+.centerTextZero {
+  /*border: 1px solid red;*/
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.centerTextOne {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: bold;
+}

@@ -1,31 +1,36 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { bigSpinMapping, smallSpinMapping } from "./spinner-param";
+import { bigSpinMapping, smallSpinMapping, spinButton } from "./spinner-param";
 import { initLoyaltyWheel, spin } from "./func/wheel-func";
-import { bigWheelSecId, smallWheelSecId } from "./setup/settings";
+import {
+  bigWheelSecId,
+  levelOne,
+  levelZero,
+  smallWheelSecId,
+} from "./setup/settings";
 import style from "./spinner.module.css";
+import WheelCanvas from "./wheel-canvas";
 
 const MainSpinner: FunctionComponent = () => {
+  const canvasHW = "700";
+  const smallCanvasHW = "234";
   // SMALL SPIN
-  // const wheelArray = smallSpinMapping;
-  // const wheelRadPx = 50;
-  // const baseSize = wheelRadPx * 2.33;
-  // const textRadius = baseSize - wheelRadPx;
-  // const canvasHW = "233";
+  const smallWheelRadPx = 50;
+  const smallBaseSize = smallWheelRadPx * 2.33;
+  const smallTextRadius = smallBaseSize - smallWheelRadPx * 1.1;
+  // const smallCanvasHW = "233";
 
   // BIG SPIN
-  // const wheelArray = bigSpinMapping;
-  // const wheelRadPx = 75;
-  // const baseSize = wheelRadPx * 3.33;
-  // const textRadius = baseSize - wheelRadPx * 2;
-  // const canvasHW = "500";
+  const bigWheelRadPx = 100;
+  const bigBaseSize = bigWheelRadPx * 3.5;
+  const bigTextRadius = bigBaseSize - bigWheelRadPx * 2;
 
   //CHANGE
-  const [spinLevel, setSpinLevel] = useState(0);
+  const [spinLevel, setSpinLevel] = useState(levelZero);
   const [wheelArray, setWheelArray] = useState(bigSpinMapping);
-  const [wheelRadPx, setWheelRadPx] = useState(75);
-  const [baseSize, setBaseSize] = useState(wheelRadPx * 3.33);
-  const [textRadius, setTextRadius] = useState(baseSize - wheelRadPx * 2);
-  const [canvasHW, setCanvasHW] = useState("500");
+  // const [wheelRadPx, setWheelRadPx] = useState(75);
+  // const [baseSize, setBaseSize] = useState(wheelRadPx * 3.33);
+  // const [textRadius, setTextRadius] = useState(baseSize - wheelRadPx * 2);
+  // const [canvasHW, setCanvasHW] = useState("500");
   // BACK
   // const wheelRadPx = 75;
   // const baseSize = wheelRadPx * 3.33;
@@ -35,23 +40,42 @@ const MainSpinner: FunctionComponent = () => {
   const [angleRadians, setAngleRadians] = useState(0);
   const [topIndex, setTopIndex] = useState(0);
   const [offsetRadians, setOffsetRadians] = useState(0);
-  const [resIndex, setResIndex] = useState(0); // INDEX
+  const [resIndex, setResIndex] = useState(0);
   const [started, setStarted] = useState(false);
-  // const [radius, setRadius] = useState(75); // PIXELS
-  // const [net, setNet] = useState(0); // RADIANS
 
   useEffect(() => {
+    if (spinLevel === levelZero) {
+      initLoyaltyWheel(
+        smallSpinMapping,
+        setAngleRadians,
+        setTopIndex,
+        setOffsetRadians,
+        smallWheelRadPx,
+        smallBaseSize,
+        smallTextRadius,
+        smallWheelSecId,
+        spinLevel
+      );
+    }
     initLoyaltyWheel(
       wheelArray,
       setAngleRadians,
       setTopIndex,
       setOffsetRadians,
-      wheelRadPx,
-      baseSize,
-      textRadius,
-      bigWheelSecId
+      bigWheelRadPx,
+      bigBaseSize,
+      bigTextRadius,
+      bigWheelSecId,
+      spinLevel
     );
-  });
+  }, [
+    wheelArray,
+    bigBaseSize,
+    bigTextRadius,
+    spinLevel,
+    smallBaseSize,
+    smallTextRadius,
+  ]);
 
   const resetWheel = () => {
     setRotDeg(0);
@@ -78,8 +102,8 @@ const MainSpinner: FunctionComponent = () => {
   };
 
   const changeWheelHandler = () => {
-    if (spinLevel === 0) {
-      setSpinLevel(1);
+    if (spinLevel === levelZero) {
+      setSpinLevel(levelOne);
       setWheelArray(smallSpinMapping);
       // setWheelRadPx(75);
       // setBaseSize(wheelRadPx * 3.33);
@@ -88,18 +112,20 @@ const MainSpinner: FunctionComponent = () => {
     }
   };
 
-  return (
-    <div className={style.mainSpin}>
-      <span className={style.selector}>&#9660;</span>
+  if (wheelArray[resIndex] === "NX") {
+    changeWheelHandler();
+  }
 
-      <canvas
-        id={bigWheelSecId}
-        width={canvasHW}
-        height={canvasHW}
-        style={{
-          WebkitTransform: `rotate(${rotDeg}deg)`,
-          WebkitTransition: `-webkit-transform ${easeOutSec}s ease-out`,
-        }}
+  return (
+    <div>
+      <span className={style.arrowDown} />
+
+      <WheelCanvas
+        canvasHW={canvasHW}
+        smallCanvasHW={smallCanvasHW}
+        rotDeg={rotDeg}
+        easeOutSec={easeOutSec}
+        spinLevel={spinLevel}
       />
 
       <button
@@ -107,7 +133,7 @@ const MainSpinner: FunctionComponent = () => {
         className={style.spinButton}
         onClick={spinWheelHandler}
       >
-        ICON
+        {spinButton()}
       </button>
 
       <div />

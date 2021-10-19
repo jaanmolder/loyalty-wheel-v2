@@ -1,16 +1,19 @@
 .mainSpin {
-  border: 1px solid red;
-  font-family: sans-serif;
-  height: 1500px;
+  /*border: 1px solid red;*/
+  /*font-family: sans-serif;*/
 }
 
-.selector {
+.arrowDown {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 40px solid #f00;
+  margin-left: 10em;
   position: absolute;
-  top: 10vh;
-  right: 48.5vw;
-  font-size: 40px;
+  left: 170px;
+  top: 120px;
   z-index: 3;
-  color: #fb0505;
 }
 
 .wheel {
@@ -23,8 +26,8 @@
 
 .spinButton {
   position: absolute;
-  bottom: 20vh;
-  right: 45vw;
+  top: 20vh;
+  right: 25vw;
 }
 
 .spinButton:hover {
