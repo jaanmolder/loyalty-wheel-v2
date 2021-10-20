@@ -3,6 +3,7 @@ export const levelOne = 1;
 export const levelTwo = 2;
 export const canvasHW = "700";
 export const smallCanvasHW = "234";
+export const defaultBigWheelStartDeg = 18;
 
 export const bigWheelSecId = "bigWheelSecId";
 export const smallWheelSecId = "smallWheelSecId";

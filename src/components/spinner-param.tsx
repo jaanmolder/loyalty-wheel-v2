@@ -1,12 +1,12 @@
 import "./icofont/icofont.css";
 
-const arrowDownFunc = () => (
-  <div className="icon-holder">
-    <div className="icon">
-      <i className="icofont-simple-down"></i>
-    </div>
-  </div>
-);
+// const arrowDownFunc = () => (
+//   <div className="icon-holder">
+//     <div className="icon">
+//       <i className="icofont-simple-down"></i>
+//     </div>
+//   </div>
+// );
 
 // const arrowDown = arrowDownFunc();
 

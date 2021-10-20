@@ -1,17 +1,20 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { bigSpinMapping, smallSpinMapping, spinButton } from "./spinner-param";
-import { initLoyaltyWheel, spin } from "./func/wheel-func";
 import {
-  bigWheelSecId, canvasHW,
+  bigWheelSecId,
+  canvasHW,
+  defaultBigWheelStartDeg,
   levelOne,
-  levelZero, smallCanvasHW,
+  levelZero,
+  smallCanvasHW,
   smallWheelSecId,
 } from "./setup/settings";
 import style from "./spinner.module.css";
 import WheelCanvas from "./wheel-canvas";
+import {initLoyaltyWheel} from "./func/init-wheel";
+import {spinWheel} from "./func/wheel-action";
 
 const MainSpinner: FunctionComponent = () => {
-
   // SMALL SPIN
   const smallWheelRadPx = 50;
   const smallBaseSize = smallWheelRadPx * 2.33;
@@ -34,7 +37,7 @@ const MainSpinner: FunctionComponent = () => {
   // const wheelRadPx = 75;
   // const baseSize = wheelRadPx * 3.33;
   // const textRadius = baseSize - 150;
-  const [rotDeg, setRotDeg] = useState(18);
+  const [rotDeg, setRotDeg] = useState(defaultBigWheelStartDeg);
   const [easeOutSec, setEaseOutSec] = useState(0);
   const [angleRadians, setAngleRadians] = useState(0);
   const [topIndex, setTopIndex] = useState(0);
@@ -77,7 +80,7 @@ const MainSpinner: FunctionComponent = () => {
   ]);
 
   const resetWheel = () => {
-    setRotDeg(0);
+    setRotDeg(defaultBigWheelStartDeg);
     setEaseOutSec(0);
     setResIndex(0);
     setStarted(false);
@@ -87,7 +90,7 @@ const MainSpinner: FunctionComponent = () => {
     if (started) {
       resetWheel();
     } else {
-      spin(
+      spinWheel(
         setRotDeg,
         setEaseOutSec,
         setStarted,
