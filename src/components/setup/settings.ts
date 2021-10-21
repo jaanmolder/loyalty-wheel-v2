@@ -8,8 +8,11 @@ export const defaultBigWheelStartDeg = 18;
 export const bigWheelSecId = "bigWheelSecId";
 export const smallWheelSecId = "smallWheelSecId";
 export const centerWheelSecId = "centerWheelSecId";
-export const bigSecTextFont = "21px Arial";
-export const smallSecTextFont = "40px Arial";
+export const bigSecTextFont = "Bold 21px Arial";
+export const bigWinIcon = "40px IcoFont";
+export const smallSecTextFont = "Bold 40px Arial";
 export const secTextColor = "white";
 
 export const winIconParam = "NX";
+
+export const textError = "Error";

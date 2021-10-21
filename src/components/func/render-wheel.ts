@@ -1,8 +1,7 @@
 import { maxWin } from "../spinner-param";
-
 import {
   bigSecTextFont,
-  bigWheelSecId,
+  bigWheelSecId, bigWinIcon,
   levelZero,
   secTextColor,
   smallSecTextFont,
@@ -57,28 +56,11 @@ export const renWheelSec = (
   );
   ctx.rotate(angle - arc / 2 + Math.PI / 2);
   if (text === winIconParam) {
-    console.log("WIN");
-
-    // const arrowFont = new FontFace( 'IcoFont',
-    //     'url(./fonts/icofont.woff2")' );
-    // document.fonts.add( arrowFont );
-    //
-    // ctx.font = '30px IcoFont';
-    // getText = '\ueab2';
-    //
-    // arrowFont.load().then( () => {
-    //   ctx.font = '30px IcoFont';
-    //   getText = '\ueab2';
-    //   ctx.fillText(getText, -ctx.measureText(text).width / 2, 0);
-    // }).catch( console.error );
-
-    ctx.font = '30px IcoFont';
-    getText = '\ueab2';
-    ctx.fillText(getText, -ctx.measureText(text).width / 2, 0);
-
-  } else {
-    ctx.fillText(getText, -ctx.measureText(text).width / 2, 0);
+    ctx.font = bigWinIcon;
+    getText = "\ueab2";
   }
+  ctx.fillText(getText, -ctx.measureText(getText).width / 2, 0);
+
   ctx.restore();
 };
 

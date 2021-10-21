@@ -1,13 +1,4 @@
 import { winIconParam } from "./setup/settings";
-import "./icofont/icofont.css";
-
-// export const arrowDownIcon = () => (
-//   <div className="icon-holder">
-//     <div className="icon">
-//       <i className="icofont-simple-down" />
-//     </div>
-//   </div>
-// );
 
 export const spinButton = () => (
   <div className="icon">

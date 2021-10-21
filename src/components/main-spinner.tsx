@@ -11,8 +11,9 @@ import {
 } from "./setup/settings";
 import style from "./spinner.module.css";
 import WheelCanvas from "./wheel-canvas";
-import {initLoyaltyWheel} from "./func/init-wheel";
-import {spinWheel} from "./func/wheel-action";
+import { initLoyaltyWheel } from "./func/init-wheel";
+import { spinWheel } from "./func/wheel-action";
+import { sleep } from "./func/general";
 
 const MainSpinner: FunctionComponent = () => {
   // SMALL SPIN
@@ -46,30 +47,33 @@ const MainSpinner: FunctionComponent = () => {
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    if (spinLevel === levelZero) {
+    (async function () {
+      await sleep(20);
+      if (spinLevel === levelZero) {
+        initLoyaltyWheel(
+          smallSpinMapping,
+          setAngleRadians,
+          setTopIndex,
+          setOffsetRadians,
+          smallWheelRadPx,
+          smallBaseSize,
+          smallTextRadius,
+          smallWheelSecId,
+          spinLevel
+        );
+      }
       initLoyaltyWheel(
-        smallSpinMapping,
+        wheelArray,
         setAngleRadians,
         setTopIndex,
         setOffsetRadians,
-        smallWheelRadPx,
-        smallBaseSize,
-        smallTextRadius,
-        smallWheelSecId,
+        bigWheelRadPx,
+        bigBaseSize,
+        bigTextRadius,
+        bigWheelSecId,
         spinLevel
       );
-    }
-    initLoyaltyWheel(
-      wheelArray,
-      setAngleRadians,
-      setTopIndex,
-      setOffsetRadians,
-      bigWheelRadPx,
-      bigBaseSize,
-      bigTextRadius,
-      bigWheelSecId,
-      spinLevel
-    );
+    })();
   }, [
     wheelArray,
     bigBaseSize,
