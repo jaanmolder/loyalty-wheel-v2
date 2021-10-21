@@ -1,3 +1,5 @@
+import { spinResDelay } from "../setup/settings";
+
 export const getSpinRes = (
   spin: number,
   offsetRadians: number,
@@ -6,11 +8,7 @@ export const getSpinRes = (
   wheelArray: any,
   setResIndex: (arg0: any) => void
 ) => {
-  // find net rotation and add to offset angle
-  // repeat substraction of inner angle amount from total distance traversed
-  // use count as an index to find value of result from state list
-  // const { angle, top, offset, list } = this.state;
-  let netRotation = ((spin % 360) * Math.PI) / 180; // RADIANS
+  let netRotation = ((spin % 360) * Math.PI) / 180;
   let travel = netRotation + offsetRadians;
   let count = topIndex + 1;
 
@@ -26,7 +24,6 @@ export const getSpinRes = (
   } else {
     getResult = wheelArray.length + count;
   }
-
   setResIndex(getResult);
 };
 
@@ -38,10 +35,8 @@ export const spinWheel = (
   angleRadians: number,
   wheelArray: string | any[],
   setResIndex: (arg0: any) => void,
-  offsetRadians: number
+  offsetRadians: number,
 ) => {
-  // set random spin degree and ease out time
-  // set state variables to initiate animation
   const randomSpin = Math.floor(Math.random() * 900) + 500;
   setRotDeg(randomSpin);
   setEaseOutSec(2);
@@ -56,17 +51,15 @@ export const spinWheel = (
       wheelArray,
       setResIndex
     );
-  }, 2000);
+  }, spinResDelay);
 };
 
-// get index of starting position of selector
 export const getWheelTopPos = (
   num: number,
   angle: number,
   setTop: any,
   setOffset: any
 ) => {
-  // set starting index and angle offset based on list length
   let topSpot = 0;
   let degreesOff = 0;
 

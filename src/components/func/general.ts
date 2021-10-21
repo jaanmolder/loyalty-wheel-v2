@@ -1,19 +1,48 @@
-import { bigWheelSecId, smallWheelSecId, textError } from "../setup/settings";
+import {
+  bigWheelSecId,
+  colorDarkGray,
+  colorGray,
+  colorGrayZero,
+  colorLightGray,
+  colorLightGrayZero,
+  levelOne,
+  levelZero,
+  smallWheelSecId,
+  textError,
+} from "../setup/settings";
 
 export const isOdd = (num: number) => num % 2 === 1;
 
-export const getSecCol = (i: number, wheelSecId: string) => {
-  if (wheelSecId === bigWheelSecId) {
+export const getSecCol = (i: number, wheelSecId: string, spinLevel: number) => {
+  if (wheelSecId === bigWheelSecId && spinLevel === levelZero) {
     if (isOdd(i)) {
-      return `#c9c9c9`;
+      return colorLightGrayZero;
     } else {
-      return `#757575`;
+      return colorGrayZero;
     }
-  } else if (wheelSecId === smallWheelSecId) {
-    if (isOdd(i)) {
-      return `#a3a3a3`;
+  } else if (wheelSecId === smallWheelSecId && spinLevel === levelZero) {
+    if (i === 0) {
+      return colorGray;
+    } else if (i === 1) {
+      return colorLightGray;
+    } else if (i === 2) {
+      return colorDarkGray;
+    } else if (i === 4) {
+      return colorLightGray;
     } else {
-      return `#727170`;
+      return colorGray;
+    }
+  } else if (wheelSecId === bigWheelSecId && spinLevel === levelOne) {
+    if (i === 0) {
+      return colorGray;
+    } else if (i === 1) {
+      return colorLightGray;
+    } else if (i === 2) {
+      return colorDarkGray;
+    } else if (i === 4) {
+      return colorLightGray;
+    } else {
+      return colorGray;
     }
   } else {
     return textError;

@@ -1,11 +1,11 @@
 import { maxWin } from "../spinner-param";
 import {
   bigSecTextFont,
-  bigWheelSecId, bigWinIcon,
+  bigWheelSecId, bigWinIcon, IconArrowDown, levelOne, levelTwo,
   levelZero,
   secTextColor,
   smallSecTextFont,
-  winIconParam,
+  winIconParam, winSecTextFont,
 } from "../setup/settings";
 
 export const renWheelSec = (
@@ -57,10 +57,9 @@ export const renWheelSec = (
   ctx.rotate(angle - arc / 2 + Math.PI / 2);
   if (text === winIconParam) {
     ctx.font = bigWinIcon;
-    getText = "\ueab2";
+    getText = IconArrowDown;
   }
   ctx.fillText(getText, -ctx.measureText(getText).width / 2, 0);
-
   ctx.restore();
 };
 
@@ -86,7 +85,8 @@ export const renWheelBorder = (wheelSecId: string, wheelRadPx: number) => {
   ctx.arc(x, y, outRad, 0, 2 * Math.PI);
   ctx.stroke();
 };
-export const renCenterWheel = (wheelSecId: string, wheelRadPx: number) => {
+
+export const renCenterWheel = (wheelSecId: string, wheelRadPx: number, spinLevel:number) => {
   const canvas = document.getElementById(wheelSecId);
   // @ts-ignore
   const ctx = canvas.getContext("2d");
@@ -95,24 +95,22 @@ export const renCenterWheel = (wheelSecId: string, wheelRadPx: number) => {
   // @ts-ignore
   const y = canvas.height / 2;
   const text = maxWin;
-  ctx.strokeStyle = "#2b1912";
-  ctx.lineWidth = 5;
   ctx.fillStyle = "#333333";
-
-  // ctx.fillStyle = 'red';
+  ctx.font = bigSecTextFont;
   let outRad = 40;
 
-  // if (wheelSecId === bigWheelSecId) {
-  //   outRad = outRad + 10;
-  // } else {
-  //   outRad = outRad - 5;
-  // }
+  if (spinLevel === levelOne) {
+    outRad = 80;
+    ctx.font = smallSecTextFont;
+  } else   if (spinLevel === levelTwo) {
+    outRad = 200;
+    ctx.font = winSecTextFont;
+  }
 
   ctx.beginPath();
   ctx.arc(x, y, outRad, 0, 2 * Math.PI);
   ctx.stroke();
   ctx.fill();
   ctx.fillStyle = secTextColor;
-  ctx.font = bigSecTextFont;
   ctx.fillText(text, x - ctx.measureText(text).width / 2, y + 21 / 2);
 };

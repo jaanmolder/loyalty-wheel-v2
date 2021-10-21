@@ -14,7 +14,6 @@ export const initLoyaltyWheel = (
   wheelSecId: string,
   spinLevel: number
 ) => {
-  // determine number/size of sectors that need to created
   const numOfOpt = wheelArray.length;
   const arcSize = (2 * Math.PI) / numOfOpt;
   let angleDeg = 0;
@@ -24,11 +23,11 @@ export const initLoyaltyWheel = (
   renWheelBorder(wheelSecId, wheelRadPx);
 
   if (wheelSecId === bigWheelSecId) {
-    renCenterWheel(centerWheelSecId, wheelRadPx);
+    renCenterWheel(centerWheelSecId, wheelRadPx, spinLevel);
   }
 
   for (let item = 0; item < numOfOpt; item++) {
-    const getColorCode = getSecCol(item, wheelSecId);
+    const getColorCode = getSecCol(item, wheelSecId, spinLevel);
     let text = wheelArray[item];
 
     renWheelSec(
