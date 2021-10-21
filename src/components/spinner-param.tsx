@@ -1,14 +1,13 @@
+import { winIconParam } from "./setup/settings";
 import "./icofont/icofont.css";
 
-// const arrowDownFunc = () => (
+// export const arrowDownIcon = () => (
 //   <div className="icon-holder">
 //     <div className="icon">
-//       <i className="icofont-simple-down"></i>
+//       <i className="icofont-simple-down" />
 //     </div>
 //   </div>
 // );
-
-// const arrowDown = arrowDownFunc();
 
 export const spinButton = () => (
   <div className="icon">
@@ -22,12 +21,12 @@ export const bigSpinMapping = [
   "6 €",
   "2 €",
   "6 €",
-  "NX",
+  winIconParam,
   "4 €",
   "5 €",
   "1 €",
   "5 €",
 ];
 
-export const smallSpinMapping = ["9 €", "10 €", "NX", "15 €", "11 €"];
+export const smallSpinMapping = ["9 €", "10 €", winIconParam, "15 €", "11 €"];
 export const maxWin = "23 €";

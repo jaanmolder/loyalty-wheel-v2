@@ -11,3 +11,5 @@ export const centerWheelSecId = "centerWheelSecId";
 export const bigSecTextFont = "21px Arial";
 export const smallSecTextFont = "40px Arial";
 export const secTextColor = "white";
+
+export const winIconParam = "NX";

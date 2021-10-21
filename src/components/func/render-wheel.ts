@@ -1,10 +1,12 @@
 import { maxWin } from "../spinner-param";
+
 import {
   bigSecTextFont,
   bigWheelSecId,
   levelZero,
   secTextColor,
   smallSecTextFont,
+  winIconParam,
 } from "../setup/settings";
 
 export const renWheelSec = (
@@ -32,6 +34,8 @@ export const renWheelSec = (
   const endAngle = startAngle + arc;
   const angle = index * arc;
 
+  let getText = text;
+
   ctx.beginPath();
   ctx.arc(x, y, wheelRadPx, startAngle, endAngle, false);
   ctx.lineWidth = wheelRadPx * 2;
@@ -52,9 +56,32 @@ export const renWheelSec = (
     baseSize + Math.sin(angle - arc / 2) * textRadius
   );
   ctx.rotate(angle - arc / 2 + Math.PI / 2);
-  ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+  if (text === winIconParam) {
+    console.log("WIN");
+
+    // const arrowFont = new FontFace( 'IcoFont',
+    //     'url(./fonts/icofont.woff2")' );
+    // document.fonts.add( arrowFont );
+    //
+    // ctx.font = '30px IcoFont';
+    // getText = '\ueab2';
+    //
+    // arrowFont.load().then( () => {
+    //   ctx.font = '30px IcoFont';
+    //   getText = '\ueab2';
+    //   ctx.fillText(getText, -ctx.measureText(text).width / 2, 0);
+    // }).catch( console.error );
+
+    ctx.font = '30px IcoFont';
+    getText = '\ueab2';
+    ctx.fillText(getText, -ctx.measureText(text).width / 2, 0);
+
+  } else {
+    ctx.fillText(getText, -ctx.measureText(text).width / 2, 0);
+  }
   ctx.restore();
 };
+
 export const renWheelBorder = (wheelSecId: string, wheelRadPx: number) => {
   const canvas = document.getElementById(wheelSecId);
   // @ts-ignore
@@ -78,7 +105,6 @@ export const renWheelBorder = (wheelSecId: string, wheelRadPx: number) => {
   ctx.stroke();
 };
 export const renCenterWheel = (wheelSecId: string, wheelRadPx: number) => {
-  console.log(wheelSecId);
   const canvas = document.getElementById(wheelSecId);
   // @ts-ignore
   const ctx = canvas.getContext("2d");

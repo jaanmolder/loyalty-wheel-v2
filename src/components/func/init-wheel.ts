@@ -4,7 +4,7 @@ import { getSecCol } from "./general";
 import { getWheelTopPos } from "./wheel-action";
 
 export const initLoyaltyWheel = (
-  wheelArray: string | any[],
+  wheelArray: any[],
   setAngleRadians: (arg0: number) => void,
   setTopIndex: any,
   setOffsetRadians: any,
@@ -15,24 +15,24 @@ export const initLoyaltyWheel = (
   spinLevel: number
 ) => {
   // determine number/size of sectors that need to created
-  const numOptions = wheelArray.length;
-  const arcSize = (2 * Math.PI) / numOptions;
+  const numOfOpt = wheelArray.length;
+  const arcSize = (2 * Math.PI) / numOfOpt;
   let angleDeg = 0;
   setAngleRadians(arcSize);
 
-  getWheelTopPos(numOptions, arcSize, setTopIndex, setOffsetRadians);
+  getWheelTopPos(numOfOpt, arcSize, setTopIndex, setOffsetRadians);
   renWheelBorder(wheelSecId, wheelRadPx);
 
   if (wheelSecId === bigWheelSecId) {
     renCenterWheel(centerWheelSecId, wheelRadPx);
   }
 
-  for (let i = 0; i < numOptions; i++) {
-    const getColorCode = getSecCol(i, wheelSecId);
-    let text = wheelArray[i];
+  for (let item = 0; item < numOfOpt; item++) {
+    const getColorCode = getSecCol(item, wheelSecId);
+    let text = wheelArray[item];
 
     renWheelSec(
-      i + 1,
+      item + 1,
       text,
       angleDeg,
       arcSize,

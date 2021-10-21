@@ -2,10 +2,6 @@ import {bigWheelSecId, smallWheelSecId,} from "../setup/settings";
 
 export const isOdd = (num: number) => num % 2 === 1;
 
-// export const sleep = (time: number) => {
-//   return new Promise((resolve) => setTimeout(resolve, time));
-// };
-
 export const getSecCol = (i: number, wheelSecId: string) => {
   if (wheelSecId === bigWheelSecId) {
     if (isOdd(i)) {
@@ -24,3 +20,6 @@ export const getSecCol = (i: number, wheelSecId: string) => {
   }
 };
 
+export const sleep = (time: number) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
+};
