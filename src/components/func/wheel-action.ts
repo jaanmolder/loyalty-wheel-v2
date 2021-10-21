@@ -1,4 +1,4 @@
-import { spinResDelay } from "../setup/settings";
+import { spinResDelay } from "../../setup/settings";
 
 export const getSpinRes = (
   spin: number,
@@ -35,7 +35,7 @@ export const spinWheel = (
   angleRadians: number,
   wheelArray: string | any[],
   setResIndex: (arg0: any) => void,
-  offsetRadians: number,
+  offsetRadians: number
 ) => {
   const randomSpin = Math.floor(Math.random() * 900) + 500;
   setRotDeg(randomSpin);

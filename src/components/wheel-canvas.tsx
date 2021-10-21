@@ -4,7 +4,7 @@ import {
   centerWheelSecId,
   levelZero,
   smallWheelSecId,
-} from "./setup/settings";
+} from "../setup/settings";
 import styles from "./wheel-canvas.module.css";
 
 type WheelCanvasTypes = {

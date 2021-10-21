@@ -1,4 +1,4 @@
-import { winIconParam } from "./setup/settings";
+import { winIconParam } from "../setup/settings";
 
 export const spinButton = () => (
   <div className="icon">

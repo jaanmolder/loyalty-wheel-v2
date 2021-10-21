@@ -1,12 +1,17 @@
 import { maxWin } from "../spinner-param";
 import {
   bigSecTextFont,
-  bigWheelSecId, bigWinIcon, IconArrowDown, levelOne, levelTwo,
+  bigWheelSecId,
+  bigWinIcon,
+  IconArrowDown,
+  levelOne,
+  levelTwo,
   levelZero,
   secTextColor,
   smallSecTextFont,
-  winIconParam, winSecTextFont,
-} from "../setup/settings";
+  winIconParam,
+  winSecTextFont,
+} from "../../setup/settings";
 
 export const renWheelSec = (
   index: number,
@@ -86,7 +91,11 @@ export const renWheelBorder = (wheelSecId: string, wheelRadPx: number) => {
   ctx.stroke();
 };
 
-export const renCenterWheel = (wheelSecId: string, wheelRadPx: number, spinLevel:number) => {
+export const renCenterWheel = (
+  wheelSecId: string,
+  wheelRadPx: number,
+  spinLevel: number
+) => {
   const canvas = document.getElementById(wheelSecId);
   // @ts-ignore
   const ctx = canvas.getContext("2d");
@@ -102,7 +111,7 @@ export const renCenterWheel = (wheelSecId: string, wheelRadPx: number, spinLevel
   if (spinLevel === levelOne) {
     outRad = 80;
     ctx.font = smallSecTextFont;
-  } else   if (spinLevel === levelTwo) {
+  } else if (spinLevel === levelTwo) {
     outRad = 200;
     ctx.font = winSecTextFont;
   }

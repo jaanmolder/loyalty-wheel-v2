@@ -9,7 +9,7 @@ import {
   levelZero,
   smallWheelSecId,
   textError,
-} from "../setup/settings";
+} from "../../setup/settings";
 
 export const isOdd = (num: number) => num % 2 === 1;
 

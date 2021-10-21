@@ -3,7 +3,7 @@ import {
   defaultBigWheelStartDeg,
   defaultBigWheelStartDegLevelTwo,
   levelOne,
-} from "./setup/settings";
+} from "../setup/settings";
 import style from "./spinner.module.css";
 import { spinButton } from "./spinner-param";
 import { spinWheel } from "./func/wheel-action";
@@ -63,9 +63,9 @@ const SpinButton: FunctionComponent<SpinButtonTypes> = ({
     }
   };
 
-  if (started) {
-    console.log("YOU WON: " + wheelArray[resIndex]);
-  }
+  // if (started) {
+  //   console.log("YOU WON: " + wheelArray[resIndex]);
+  // }
 
   return (
     <>

@@ -13,7 +13,7 @@ import {
   smallWheelSecId,
   winIconParam,
   winSwitchDelay,
-} from "./setup/settings";
+} from "../setup/settings";
 import style from "./spinner.module.css";
 import WheelCanvas from "./wheel-canvas";
 import { initLoyaltyWheel } from "./func/init-wheel";

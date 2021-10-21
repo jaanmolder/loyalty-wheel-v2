@@ -1,5 +1,5 @@
 import { renCenterWheel, renWheelBorder, renWheelSec } from "./render-wheel";
-import { bigWheelSecId, centerWheelSecId } from "../setup/settings";
+import { bigWheelSecId, centerWheelSecId } from "../../setup/settings";
 import { getSecCol } from "./general";
 import { getWheelTopPos } from "./wheel-action";
 
