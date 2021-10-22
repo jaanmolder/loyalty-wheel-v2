@@ -14,7 +14,7 @@ import {
 import WheelCanvas from "./wheel-canvas";
 import { sleep } from "./func/general";
 import SpinButton from "./spin-button";
-import ChangeButton from "./change-button";
+// import ChangeButton from "./change-button";
 import { init } from "./func/init";
 import styleSpinner from "./spinner.module.css";
 import style from "./loyalty-wheel.module.css";
@@ -94,7 +94,7 @@ const LoyaltyWheel: FunctionComponent = () => {
           spinLevel={spinLevel}
         />
       </div>
-      <ChangeButton changeWheelHandler={changeWheelHandler} />
+      {/*<ChangeButton changeWheelHandler={changeWheelHandler} />*/}
       <div className={style.button}>
         <SpinButton
           spinLevel={spinLevel}
