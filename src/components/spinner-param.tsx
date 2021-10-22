@@ -1,11 +1,5 @@
 import { winIconParam } from "../setup/settings";
 
-export const spinButton = () => (
-  <div className="icon">
-    <i className="icofont-spinner-alt-3" />
-  </div>
-);
-
 export const bigSpinMapping = [
   "8 €",
   "3 €",

@@ -5,8 +5,8 @@ import {
   levelOne,
 } from "../setup/settings";
 import style from "./spinner.module.css";
-import { spinButton } from "./spinner-param";
 import { spinWheel } from "./func/wheel-action";
+import "./spin-button.css";
 
 type SpinButtonTypes = {
   spinLevel: number;
@@ -69,13 +69,17 @@ const SpinButton: FunctionComponent<SpinButtonTypes> = ({
 
   return (
     <>
-      <button
-        type="button"
-        className={style.spinButton}
-        onClick={spinWheelHandler}
-      >
-        {spinButton()}
-      </button>
+      <div className={style.spinButton} onClick={spinWheelHandler}>
+        <ul className="iconlist">
+          <li>
+            <div className="icon-holder">
+              <div className="icon">
+                <i className="icofont-spinner-alt-3" />
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };

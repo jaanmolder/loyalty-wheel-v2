@@ -1,0 +1,23 @@
+.iconlist li .icon-holder {
+  position: relative;
+  text-align: center;
+  background: #ff0000;
+  border: 1px solid #e4e5ea;
+  border-radius: 75%;
+  transition: all 0.2s linear 0s;
+}
+.iconlist li .icon-holder:hover {
+  background: #ff0000;
+  /*color: #ffffff;*/
+}
+.iconlist li .icon-holder:hover .icon i {
+  color: black !important;
+}
+.iconlist li .icon-holder .icon {
+  /*padding: 20px;*/
+  text-align: center;
+}
+.iconlist li .icon-holder .icon i {
+  font-size: 3em;
+  color: white !important;
+}

@@ -1,6 +1,5 @@
 .mainSpin {
   /*border: 1px solid red;*/
-  /*font-family: sans-serif;*/
 }
 
 .arrowDown {
@@ -20,14 +19,12 @@
   border: 1px solid red;
   width: 100%;
   height: 100%;
-  /*border: 10px solid #2f2a27;*/
-  /*border-radius: 50%;*/
 }
 
 .spinButton {
-  position: absolute;
-  top: 20vh;
-  right: 25vw;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
 }
 
 .spinButton:hover {
@@ -51,35 +48,4 @@ button {
 .readout {
   position: absolute;
   bottom: 7vh;
-  /*left: 35vw;*/
 }
-
-/*body {*/
-/*  !*background: linear-gradient(to left,rgb(138, 52, 52),rgb(97, 97, 199));*!*/
-/*}*/
-
-/*#spin:focus, #reset:focus {*/
-/*    outline:none;*/
-/*}*/
-
-/* #reset {
-  position: absolute;
-  bottom: 20vh;
-  right: 35vw;
-} */
-
-/*#reset:hover {*/
-/*    color: red;*/
-/*    border-color: red;*/
-/*}*/
-
-/*#result{*/
-/*    font-size:50px;*/
-/*    color: rgb(0, 180, 120);*/
-/*}*/
-
-/*input {*/
-/*    font-size: 16px;*/
-/*    border:none;*/
-/*    border-bottom: 1px solid black*/
-/*}*/

@@ -1,0 +1,15 @@
+.body {
+  /*position: relative;*/
+}
+
+.wheel {
+  position: absolute;
+  z-index: 0;
+}
+
+.button {
+  position: absolute;
+  left: 500px;
+  top: 50px;
+  z-index: 1;
+}

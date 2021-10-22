@@ -11,12 +11,13 @@ import {
   winIconParam,
   winSwitchDelay,
 } from "../setup/settings";
-import style from "./spinner.module.css";
 import WheelCanvas from "./wheel-canvas";
 import { sleep } from "./func/general";
 import SpinButton from "./spin-button";
 import ChangeButton from "./change-button";
 import { init } from "./func/init";
+import styleSpinner from "./spinner.module.css";
+import style from "./loyalty-wheel.module.css";
 
 const LoyaltyWheel: FunctionComponent = () => {
   const [textRadiusMulti, setTextRadiusMulti] = useState(2);
@@ -82,30 +83,33 @@ const LoyaltyWheel: FunctionComponent = () => {
   };
 
   return (
-    <div>
-      <span className={style.arrowDown} />
-      <WheelCanvas
-        canvasHW={canvasHW}
-        smallCanvasHW={smallCanvasHW}
-        rotDeg={rotDeg}
-        easeOutSec={easeOutSec}
-        spinLevel={spinLevel}
-      />
-      <div />
+    <div className={style.body}>
+      <span className={styleSpinner.arrowDown} />
+      <div className={style.wheel}>
+        <WheelCanvas
+          canvasHW={canvasHW}
+          smallCanvasHW={smallCanvasHW}
+          rotDeg={rotDeg}
+          easeOutSec={easeOutSec}
+          spinLevel={spinLevel}
+        />
+      </div>
       <ChangeButton changeWheelHandler={changeWheelHandler} />
-      <SpinButton
-        spinLevel={spinLevel}
-        setRotDeg={setRotDeg}
-        setEaseOutSec={setEaseOutSec}
-        setResIndex={setResIndex}
-        setStarted={setStarted}
-        started={started}
-        topIndex={topIndex}
-        angleRadians={angleRadians}
-        wheelArray={wheelArray}
-        offsetRadians={offsetRadians}
-        resIndex={resIndex}
-      />
+      <div className={style.button}>
+        <SpinButton
+          spinLevel={spinLevel}
+          setRotDeg={setRotDeg}
+          setEaseOutSec={setEaseOutSec}
+          setResIndex={setResIndex}
+          setStarted={setStarted}
+          started={started}
+          topIndex={topIndex}
+          angleRadians={angleRadians}
+          wheelArray={wheelArray}
+          offsetRadians={offsetRadians}
+          resIndex={resIndex}
+        />
+      </div>
     </div>
   );
 };
