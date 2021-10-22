@@ -3,7 +3,7 @@ import { bigWheelSecId, centerWheelSecId } from "../../setup/settings";
 import { getSecCol } from "./general";
 import { getWheelTopPos } from "./wheel-action";
 
-export const initLoyaltyWheel = (
+export const render = (
   wheelArray: any[],
   setAngleRadians: (arg0: number) => void,
   setTopIndex: any,

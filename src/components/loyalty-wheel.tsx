@@ -1,27 +1,24 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { bigSpinMapping, smallSpinMapping } from "./spinner-param";
 import {
-  bigWheelSecId,
   canvasHW,
   defaultBigWheelStartDeg,
   defaultBigWheelStartDegLevelTwo,
-  iniLoadDelay,
   levelOne,
   levelTwo,
   levelZero,
   smallCanvasHW,
-  smallWheelSecId,
   winIconParam,
   winSwitchDelay,
 } from "../setup/settings";
 import style from "./spinner.module.css";
 import WheelCanvas from "./wheel-canvas";
-import { initLoyaltyWheel } from "./func/init-wheel";
 import { sleep } from "./func/general";
 import SpinButton from "./spin-button";
 import ChangeButton from "./change-button";
+import { init } from "./func/init";
 
-const MainSpinner: FunctionComponent = () => {
+const LoyaltyWheel: FunctionComponent = () => {
   const [textRadiusMulti, setTextRadiusMulti] = useState(2);
   const [spinLevel, setSpinLevel] = useState(levelZero);
   const [wheelArray, setWheelArray] = useState(bigSpinMapping);
@@ -41,30 +38,18 @@ const MainSpinner: FunctionComponent = () => {
 
   useEffect(() => {
     (async function () {
-      await sleep(iniLoadDelay);
-      if (spinLevel === levelZero) {
-        initLoyaltyWheel(
-          smallSpinMapping,
-          setAngleRadians,
-          setTopIndex,
-          setOffsetRadians,
-          smallWheelRadPx,
-          smallBaseSize,
-          smallTextRadius,
-          smallWheelSecId,
-          spinLevel
-        );
-      }
-      initLoyaltyWheel(
-        wheelArray,
+      await init(
+        spinLevel,
         setAngleRadians,
         setTopIndex,
         setOffsetRadians,
+        smallWheelRadPx,
+        smallBaseSize,
+        smallTextRadius,
+        wheelArray,
         bigWheelRadPx,
         bigBaseSize,
-        bigTextRadius,
-        bigWheelSecId,
-        spinLevel
+        bigTextRadius
       );
     })();
   }, [
@@ -125,4 +110,4 @@ const MainSpinner: FunctionComponent = () => {
   );
 };
 
-export default MainSpinner;
+export default LoyaltyWheel;
